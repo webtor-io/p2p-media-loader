@@ -14,6 +14,20 @@ function makeConfig({ libName, minimize, plugins }) {
           rules: [
             // all files with a `.ts` extension will be handled by `ts-loader`
             { test: /\.ts?$/, exclude: [/node_modules/], loader: "ts-loader" },
+
+            // Remove require('url') module because URL object already exists in a browser environment
+            {
+                test: /\/node_modules\/bittorrent-tracker\/client\.js$/, loader: 'string-replace-loader',
+                options: { search: `const URL = require('url').URL`, replace: `` },
+            },
+            { // TODO: remove once new bittorrent-tracker is released
+                test: /\/node_modules\/bittorrent-tracker\/client\.js$/, loader: 'string-replace-loader',
+                options: { search: `url.parse(announceUrl)`, replace: `new URL(announceUrl)` },
+            },
+            { // TODO: remove once new bittorrent-tracker is released
+                test: /\/node_modules\/bittorrent-tracker\/client\.js$/, loader: 'string-replace-loader',
+                options: { search: `const url = require('url')`, replace: `` },
+            },
           ],
         },
         output: {
