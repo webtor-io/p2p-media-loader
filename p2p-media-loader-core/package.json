@@ -45,7 +45,7 @@
     "simple-peer": "^9.4.0"
   },
   "devDependencies": {
-    "@types/assert": "^1.4.2",
+    "@types/assert": "^1.4.3",
     "@types/debug": "^4.1.4",
     "@types/events": "^3.0.0",
     "@types/mocha": "^5.2.7",
@@ -56,11 +56,11 @@
     "mocha": "^6.2.0",
     "terser": "^4.1.2",
     "ts-loader": "^6.0.4",
-    "ts-mockito": "^2.3.1",
+    "ts-mockito": "^2.4.2",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3",
-    "webpack": "^4.36.1",
+    "webpack": "^4.38.0",
     "webpack-bundle-analyzer": "^3.4.1",
     "webpack-cli": "^3.3.6"
   }
