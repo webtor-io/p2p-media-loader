@@ -28,6 +28,32 @@ function makeConfig({ libName, minimize, plugins }) {
                 test: /\/node_modules\/bittorrent-tracker\/client\.js$/, loader: 'string-replace-loader',
                 options: { search: `const url = require('url')`, replace: `` },
             },
+
+            // Remove unused Buffer methods
+            {
+                test: /\/buffer\/index\.js$/, loader: 'string-replace-loader',
+                options: { search: `Buffer\\.prototype\\.(slice|compare|equals|indexOf|lastIndexOf|concat|swap16|swap32|swap64) = function`, replace: `function`, flags: "g" },
+            },
+            {
+                test: /\/buffer\/index\.js$/, loader: 'string-replace-loader',
+                options: { search: `Buffer\\.compare = function`, replace: `function`, flags: "g" },
+            },
+            {
+                test: /\/buffer\/index\.js$/, loader: 'string-replace-loader',
+                options: { search: `Buffer\\.prototype\\.(writeUInt((?!32BE)\\S)*|writeInt((?!32BE)\\S)*|readInt((?!32BE)\\S)*|readUInt\\S*|(read|write)(Float|Double)\\S*|fill) = `, replace: ``, flags: "g" },
+            },
+
+            // Remove unused Readable methods
+            {
+                test: /\/readable-stream\/lib\/_stream_readable\.js$/, loader: 'string-replace-loader',
+                options: { search: `Readable\\.prototype\\.(pipe|unpipe|wrap) = function`, replace: `function ___x`, flags: "g" },
+            },
+
+            // Remove unused Peer methods
+            {
+                test: /\/simple-peer\/index\.js$/, loader: 'string-replace-loader',
+                options: { search: `Peer\\.prototype\\.(addTrack|replaceTrack|removeTrack|removeStream) = function`, replace: `function ___x`, flags: "g" },
+            },
           ],
         },
         output: {
@@ -38,6 +64,15 @@ function makeConfig({ libName, minimize, plugins }) {
             minimize: minimize,
         },
         plugins: [...(plugins ? plugins : [])],
+        externals: {
+            // Remove unused dependencies
+            "string_decoder/": "undefined",
+            "./lib/_stream_transform.js": "undefined",
+            "./lib/_stream_passthrough.js": "undefined",
+            "base64-js": "undefined",
+            "ieee754": "undefined",
+            "core-util-is": "{}",
+        },
     };
 }
 
