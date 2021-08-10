@@ -25,6 +25,7 @@ export class HttpMediaManager extends STEEmitter<
 
     private xhrRequests: Map<string, {xhr: XMLHttpRequest, segment: Segment}> = new Map();
     private failedSegments: Map<string, number> = new Map();
+    private prepairingSegments: Map<string, boolean> = new Map();
     private debug = Debug("p2pml:http-media-manager");
 
     public constructor(readonly settings: {
@@ -37,16 +38,38 @@ export class HttpMediaManager extends STEEmitter<
         super();
     }
 
-    public download(segment: Segment, downloadedPieces?: ArrayBuffer[]): void {
+    public isPrepairing(segment: Segment): boolean {
+        return this.prepairingSegments.has(segment.id);
+    }
+
+    public setPrepairing(segment: Segment) {
+        this.prepairingSegments.set(segment.id, true);
+    }
+
+    public unsetPrepairing(segment: Segment) {
+        this.prepairingSegments.delete(segment.id);
+    }
+
+    public prepairingCount(): number {
+        return this.prepairingSegments.size;
+    }
+
+    public async download(segment: Segment, downloadedPieces?: ArrayBuffer[]): Promise<void> {
+        if (this.isPrepairing(segment)) {
+            return;
+        }
         if (this.isDownloading(segment)) {
             return;
         }
+        this.setPrepairing(segment);
 
         this.cleanTimedOutFailedSegments();
 
         const segmentUrl = this.settings.segmentUrlBuilder
-            ? this.settings.segmentUrlBuilder(segment)
+            ? await this.settings.segmentUrlBuilder(segment)
             : segment.url;
+        
+        if (!segmentUrl) return;
 
         this.debug("http segment download", segmentUrl);
 
@@ -80,6 +103,7 @@ export class HttpMediaManager extends STEEmitter<
 
         this.xhrRequests.set(segment.id, {xhr, segment});
         xhr.send();
+        this.unsetPrepairing(segment);
     }
 
     public abort(segment: Segment): void {
@@ -106,7 +130,8 @@ export class HttpMediaManager extends STEEmitter<
     }
 
     public getActiveDownloadsCount(): number {
-        return this.xhrRequests.size;
+        this.debug("prep count", this.prepairingCount());
+        return this.xhrRequests.size + this.prepairingCount();
     }
 
     public destroy(): void {

@@ -517,7 +517,7 @@ export interface SegmentsStorage {
 
 export type SegmentValidatorCallback = (segment: Segment, method: "http" | "p2p", peerId?: string) => Promise<void>;
 export type XhrSetupCallback = (xhr: XMLHttpRequest, url: string) => void;
-export type SegmentUrlBuilder = (segment: Segment) => string;
+export type SegmentUrlBuilder = (segment: Segment) => Promise<string>;
 
 export interface HybridLoaderSettings {
     /**
