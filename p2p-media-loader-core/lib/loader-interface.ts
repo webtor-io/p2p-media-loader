@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export interface Segment {
+export type Segment = {
     readonly id: string;
     readonly url: string;
     readonly masterSwarmId: string;
@@ -27,7 +27,7 @@ export interface Segment {
     downloadBandwidth?: number;
     requestUrl?: string;
     responseUrl?: string;
-}
+};
 
 export enum Events {
     /**
@@ -70,14 +70,17 @@ export enum Events {
      * Emitted when a segment piece has been uploaded.
      * Args: method (can be "p2p" only), bytes
      */
-    PieceBytesUploaded = "piece_bytes_uploaded"
+    PieceBytesUploaded = "piece_bytes_uploaded",
 }
 
 export interface LoaderInterface {
-    on(eventName: string, listener: (...params: any[]) => void): this;
-    load(segments: Segment[], streamSwarmId: string): void;
-    getSegment(id: string): Promise<Segment | undefined>;
-    getSettings(): any;
-    getDetails(): any;
-    destroy(): Promise<void>;
+    on: ((eventName: string, listener: (...params: unknown[]) => void) => this) &
+        ((eventName: Events.SegmentLoaded, listener: (segment: Segment) => void) => this) &
+        ((eventName: Events.SegmentError, listener: (segment: Segment, error: unknown) => void) => this) &
+        ((eventName: Events.SegmentAbort, listener: (segment: Segment) => void) => this);
+    load: (segments: Segment[], streamSwarmId: string) => void;
+    getSegment: (id: string) => Promise<Segment | undefined>;
+    getSettings: () => unknown;
+    getDetails: () => unknown;
+    destroy: () => Promise<void>;
 }

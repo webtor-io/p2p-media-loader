@@ -25,7 +25,6 @@ export interface ShakaEngineSettings {
 }
 
 export class Engine extends EventEmitter {
-
     public static isSupported(): boolean {
         return HybridLoader.isSupported();
     }
@@ -40,31 +39,33 @@ export class Engine extends EventEmitter {
         this.segmentManager = new SegmentManager(this.loader, settings.segments);
 
         Object.keys(Events)
-            .map(eventKey => Events[eventKey as keyof typeof Events])
-            .forEach(event => this.loader.on(event, (...args: any[]) => this.emit(event, ...args)));
+            .map((eventKey) => Events[eventKey as keyof typeof Events])
+            .forEach((event) => this.loader.on(event, (...args: unknown[]) => this.emit(event, ...args)));
     }
 
-    public async destroy() {
+    public async destroy(): Promise<void> {
         await this.segmentManager.destroy();
     }
 
-    public getSettings(): any {
+    public getSettings(): {
+        segments: SegmentManagerSettings;
+        loader: unknown;
+    } {
         return {
             segments: this.segmentManager.getSettings(),
-            loader: this.loader.getSettings()
+            loader: this.loader.getSettings(),
         };
     }
 
-    public getDetails(): any {
+    public getDetails(): { loader: unknown } {
         return {
-            loader: this.loader.getDetails()
+            loader: this.loader.getDetails(),
         };
     }
 
-    public initShakaPlayer(player: any) {
+    public initShakaPlayer(player: shaka.Player): void {
         integration.initShakaPlayer(player, this.segmentManager);
     }
-
 }
 
 export interface Asset {
