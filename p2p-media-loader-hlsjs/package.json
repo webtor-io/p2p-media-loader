@@ -1,5 +1,5 @@
 {
-  "name": "p2p-media-loader-hlsjs",
+  "name": "@webtor/p2p-media-loader-hlsjs",
   "description": "P2P Media Loader hls.js integration",
   "version": "0.6.2",
   "license": "Apache-2.0",
