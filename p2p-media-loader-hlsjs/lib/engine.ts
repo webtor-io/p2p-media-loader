@@ -15,7 +15,7 @@
  */
 
 import { EventEmitter } from "events";
-import { Events, LoaderInterface, HybridLoader, HybridLoaderSettings } from "p2p-media-loader-core";
+import { Events, LoaderInterface, HybridLoader, HybridLoaderSettings } from "@webtor/p2p-media-loader-core";
 import { SegmentManager, ByteRange, SegmentManagerSettings } from "./segment-manager";
 import { HlsJsLoader } from "./hlsjs-loader";
 import type { LoaderCallbacks, LoaderConfiguration, LoaderContext, LoaderStats } from "hls.js";

@@ -21,7 +21,7 @@ import { mock, instance, when, anyFunction } from "ts-mockito";
 import * as assert from "assert";
 
 import { SegmentManager } from "../lib/segment-manager";
-import { Events, Segment, LoaderInterface } from "p2p-media-loader-core";
+import { Events, Segment, LoaderInterface } from "@webtor/p2p-media-loader-core";
 
 class LoaderInterfaceEmptyImpl implements LoaderInterface {
     public on() {

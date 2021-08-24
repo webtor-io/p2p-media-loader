@@ -12,7 +12,7 @@ Useful links:
 - [Overview](http://novage.com.ua/p2p-media-loader/overview.html)
 - [Technical overview](http://novage.com.ua/p2p-media-loader/technical-overview.html)
 - JS CDN
-  - [Core](https://cdn.jsdelivr.net/npm/p2p-media-loader-core@latest/build/)
+  - [Core](https://cdn.jsdelivr.net/npm/@webtor/p2p-media-loader-core@latest/build/)
   - [Hls.js integration](https://cdn.jsdelivr.net/npm/p2p-media-loader-hlsjs@latest/build/)
   - [Shaka integration](https://cdn.jsdelivr.net/npm/p2p-media-loader-shaka@latest/build/)
 
@@ -33,7 +33,7 @@ General steps are:
 <head>
     <title>Clappr/Hls.js with P2P Media Loader</title>
     <meta charset="utf-8">
-    <script src="https://cdn.jsdelivr.net/npm/p2p-media-loader-core@latest/build/p2p-media-loader-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@webtor/p2p-media-loader-core@latest/build/@webtor/p2p-media-loader-core.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p2p-media-loader-hlsjs@latest/build/p2p-media-loader-hlsjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clappr@latest"></script>
 </head>
@@ -98,7 +98,7 @@ Creates a new `Engine` instance.
     + `swarmId` - Override default swarm ID that is used to identify unique media stream with trackers (manifest URL without query parameters is used as the swarm ID if the parameter is not specified).
     + `assetsStorage` - A storage for the downloaded assets: manifests, subtitles, init segments, DRM assets etc. By default the assets are not stored. Can be used to implement offline plabyack. See [AssetsStorage](#assetsstorage-interface) interface for details.
 - `loader`
-    + settings for `HybridLoader` (see [P2P Media Loader Core API](../p2p-media-loader-core/README.md#loader--new-hybridloadersettings) for details).
+    + settings for `HybridLoader` (see [P2P Media Loader Core API](../@webtor/p2p-media-loader-core/README.md#loader--new-hybridloadersettings) for details).
 
 ### AssetsStorage interface
 ```typescript
@@ -122,7 +122,7 @@ interface AssetsStorage {
 
 Registers an event handler.
 
-- `event` - Event you want to handle; available events you can find [here](../p2p-media-loader-core/README.md#events).
+- `event` - Event you want to handle; available events you can find [here](../@webtor/p2p-media-loader-core/README.md#events).
 - `handler` - Function to handle the event
 
 ### `engine.getSettings()`
