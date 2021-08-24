@@ -1,5 +1,5 @@
 {
-  "name": "@webtor/p2p-media-loader-core",
+  "name": "p2p-media-loader-core",
   "description": "P2P Media Loader core functionality",
   "version": "0.6.2",
   "license": "Apache-2.0",

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Events, Segment, LoaderInterface, XhrSetupCallback } from "@webtor/p2p-media-loader-core";
+import { Events, Segment, LoaderInterface, XhrSetupCallback } from "p2p-media-loader-core";
 import { Manifest, Parser } from "m3u8-parser";
 import { AssetsStorage } from "./engine";
 

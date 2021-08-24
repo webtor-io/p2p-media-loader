@@ -61,7 +61,7 @@ window.p2pml.hlsjs = hlsjs;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Engine = void 0;
 const events_1 = require("events");
-const p2p_media_loader_core_1 = require("@webtor/p2p-media-loader-core");
+const p2p_media_loader_core_1 = require("p2p-media-loader-core");
 const segment_manager_1 = require("./segment-manager");
 const hlsjs_loader_1 = require("./hlsjs-loader");
 class Engine extends events_1.EventEmitter {
@@ -129,7 +129,7 @@ class Engine extends events_1.EventEmitter {
 }
 exports.Engine = Engine;
 
-},{"./hlsjs-loader":3,"./segment-manager":4,"@webtor/p2p-media-loader-core":"@webtor/p2p-media-loader-core","events":"events"}],3:[function(require,module,exports){
+},{"./hlsjs-loader":3,"./segment-manager":4,"events":"events","p2p-media-loader-core":"p2p-media-loader-core"}],3:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2018 Novage LLC.
@@ -148,7 +148,7 @@ exports.Engine = Engine;
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HlsJsLoader = void 0;
-const p2p_media_loader_core_1 = require("@webtor/p2p-media-loader-core");
+const p2p_media_loader_core_1 = require("p2p-media-loader-core");
 const DEFAULT_DOWNLOAD_LATENCY = 1;
 const DEFAULT_DOWNLOAD_BANDWIDTH = 12500; // bytes per millisecond
 class HlsJsLoader {
@@ -289,7 +289,7 @@ function getByteRange(context) {
         : undefined;
 }
 
-},{"@webtor/p2p-media-loader-core":"@webtor/p2p-media-loader-core"}],4:[function(require,module,exports){
+},{"p2p-media-loader-core":"p2p-media-loader-core"}],4:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2018 Novage LLC.
@@ -308,7 +308,7 @@ function getByteRange(context) {
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SegmentManager = void 0;
-const p2p_media_loader_core_1 = require("@webtor/p2p-media-loader-core");
+const p2p_media_loader_core_1 = require("p2p-media-loader-core");
 const m3u8_parser_1 = require("m3u8-parser");
 const defaultSettings = {
     forwardSegmentCount: 20,
@@ -678,7 +678,7 @@ function byteRangeToString(byteRange) {
     return `bytes=${byteRange.offset}-${end}`;
 }
 
-},{"@webtor/p2p-media-loader-core":"@webtor/p2p-media-loader-core","m3u8-parser":13}],5:[function(require,module,exports){
+},{"m3u8-parser":13,"p2p-media-loader-core":"p2p-media-loader-core"}],5:[function(require,module,exports){
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");

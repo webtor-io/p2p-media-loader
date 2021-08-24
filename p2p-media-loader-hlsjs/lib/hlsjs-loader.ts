@@ -16,7 +16,7 @@
 
 import { SegmentManager } from "./segment-manager";
 import type { LoaderCallbacks, LoaderConfiguration, LoaderContext, LoaderStats } from "hls.js";
-import { Events } from "@webtor/p2p-media-loader-core";
+import { Events } from "p2p-media-loader-core";
 
 const DEFAULT_DOWNLOAD_LATENCY = 1;
 const DEFAULT_DOWNLOAD_BANDWIDTH = 12500; // bytes per millisecond
