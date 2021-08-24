@@ -37,7 +37,7 @@
   "dependencies": {
     "events": "^3.3.0",
     "m3u8-parser": "^4.6.0",
-    "p2p-media-loader-core": "^0.6.2"
+    "p2p-media-loader-core": "file:../p2p-media-loader-core"
   },
   "devDependencies": {
     "@types/events": "^3.0.0",
